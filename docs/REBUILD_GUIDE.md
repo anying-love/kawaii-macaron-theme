@@ -171,6 +171,43 @@ extension/
    - `Kawaii Macaron · Cream Milk 奶油白`
 3. 验证「粉色边框 + 暖黄/奶油白代码区 + 可读的语法高亮」三项是否符合预期。
 
+## 8.5 配置到 VS Code（主题 + 配套字体）
+
+装好主题后，建议再配一套与软萌风格匹配的等宽楷体，观感更统一。
+
+### 切换主题
+
+`Ctrl+K` 松开后再按 `Ctrl+T`（或 `Ctrl+Shift+P` → `Preferences: Color Theme`），选择 `Kawaii Macaron · Warm Yellow 暖黄` 或 `Kawaii Macaron · Cream Milk 奶油白`。
+
+### 配置字体（settings.json）
+
+`Ctrl+Shift+P` → 输入 `Open User Settings (JSON)` → 回车，加入：
+
+```json
+{
+  "editor.fontFamily": "'LXGW WenKai Mono', 'LXGW WenKai', Consolas, 'Courier New', monospace",
+  "editor.fontSize": 15,
+  "editor.lineHeight": 1.7,
+  "editor.fontLigatures": false,
+  "terminal.integrated.fontFamily": "'LXGW WenKai Mono', Consolas, monospace"
+}
+```
+
+- 首选 `LXGW WenKai Mono`（霞鹜文楷等宽版，楷体手写感，与粉色软萌主题气质一致）。
+- 官方下载：GitHub `lxgw/LxgwWenKai` → Releases（SIL OFL-1.1 开源，免费商用）。
+- 字体需先安装进系统（右键 `.ttf` → 安装）后，VS Code 才能调用。
+
+### 完整 settings.json 示例
+
+```json
+{
+  "workbench.colorTheme": "Kawaii Macaron · Warm Yellow 暖黄",
+  "editor.fontFamily": "'LXGW WenKai Mono', 'LXGW WenKai', Consolas, monospace",
+  "editor.fontSize": 15,
+  "editor.lineHeight": 1.7
+}
+```
+
 ## 9. 复现清单（Checklist）
 
 - [ ] 建目录结构（第 3 节）
