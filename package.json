@@ -1,0 +1,51 @@
+{
+  "name": "kawaii-macaron-theme",
+  "displayName": "Kawaii Macaron Theme · 卡哇伊马卡龙主题",
+  "description": "软萌马卡龙风格的 VS Code 主题：低饱和暖调粉色边框 + 暖黄/奶油白代码区，甜软少女感且不影响代码阅读。",
+  "version": "1.0.0",
+  "publisher": "kawaii-lab",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "kawaii",
+    "macaron",
+    "pink",
+    "cute",
+    "pastel",
+    "soft",
+    "warm",
+    "卡哇伊",
+    "马卡龙",
+    "粉色",
+    "可爱",
+    "软萌"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Kawaii Macaron · Warm Yellow 暖黄",
+        "uiTheme": "vs",
+        "path": "./themes/kawaii-macaron-warm.json"
+      },
+      {
+        "label": "Kawaii Macaron · Cream Milk 奶油白",
+        "uiTheme": "vs",
+        "path": "./themes/kawaii-macaron-cream.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kawaii-lab/kawaii-macaron-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kawaii-lab/kawaii-macaron-theme/issues"
+  },
+  "homepage": "https://github.com/kawaii-lab/kawaii-macaron-theme#readme"
+}

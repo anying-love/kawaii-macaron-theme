@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kawaii Macaron Theme · 卡哇伊马卡龙主题预览</title>
+<style>
+  :root {
+    --bg: #241f2e;
+    --card-bg: #2e2838;
+    --ink: #efe9f5;
+    --muted: #b7aec7;
+    --pink: #E58AA8;
+    --pink-deep: #C2587F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    background: linear-gradient(160deg, #2a2335 0%, #1e1a28 100%);
+    color: var(--ink);
+    padding: 40px 24px 60px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 36px; }
+  .tag {
+    display: inline-block; font-size: 13px; letter-spacing: 1px;
+    background: rgba(229,138,168,.18); color: #f4b8c8;
+    padding: 4px 14px; border-radius: 999px; border: 1px solid rgba(229,138,168,.4);
+    margin-bottom: 14px;
+  }
+  h1 { font-size: 30px; font-weight: 700; }
+  h1 .en { color: #f4b8c8; }
+  .sub { color: var(--muted); margin-top: 8px; font-size: 15px; }
+  .palette {
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    margin: 26px 0 40px;
+  }
+  .swatch {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted);
+  }
+  .dot {
+    width: 56px; height: 56px; border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.35);
+    border: 1px solid rgba(255,255,255,.15);
+  }
+  .dot span { display: block; font-size: 10px; color: #6b5a4c; text-align: center; line-height: 56px; }
+
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 700; margin: 34px 0 16px;
+  }
+  .section-title::before { content: ""; width: 6px; height: 22px; border-radius: 3px; background: var(--pink); }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .theme-card {
+    background: var(--card-bg); border-radius: 18px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  }
+  .theme-head { padding: 16px 18px 12px; }
+  .theme-head .name { font-size: 17px; font-weight: 700; }
+  .theme-head .desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* 模拟 VS Code 窗口 */
+  .vscode { font-family: "Cascadia Code", "Consolas", monospace; font-size: 12.5px; }
+  .win { border: 2px solid #F2B4C4; border-radius: 10px; overflow: hidden; margin: 0 16px 16px; }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 6px 10px; }
+  .dots { display: flex; gap: 5px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+  .dots i:nth-child(1){ background:#f08080; }
+  .dots i:nth-child(2){ background:#f0c060; }
+  .dots i:nth-child(3){ background:#80c080; }
+  .tabs { display: flex; gap: 2px; margin-left: 8px; }
+  .tab { padding: 4px 12px; font-size: 11px; border-radius: 6px 6px 0 0; border-bottom: 2px solid transparent; }
+  .tab.active { border-bottom-color: #E58AA8; }
+  .body { display: flex; }
+  .activitybar {
+    width: 42px; display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding: 12px 0;
+  }
+  .activitybar i { width: 22px; height: 22px; border-radius: 6px; display: block; }
+  .sidebar { width: 128px; padding: 12px 10px; font-size: 11.5px; }
+  .sidebar .folder { font-weight: 700; margin-bottom: 6px; }
+  .sidebar .file { padding: 2px 6px; border-radius: 5px; margin-bottom: 2px; }
+  .sidebar .file.on { font-weight: 600; }
+  .editor { flex: 1; position: relative; padding: 12px 8px 12px 0; }
+  .code-line { display: flex; padding: 0 10px; white-space: pre; }
+  .ln { width: 34px; text-align: right; padding-right: 12px; user-select: none; opacity: .55; flex-shrink: 0; }
+  .ln.cur { font-weight: 700; }
+  .statusbar { display: flex; gap: 14px; padding: 5px 12px; font-size: 11px; }
+  .cursor { display: inline-block; width: 2px; height: 15px; background: #E58AA8; vertical-align: -3px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* token 颜色 */
+  .t-key { color: #C2587F; }
+  .t-str { color: #A8763F; }
+  .t-num { color: #C0784F; }
+  .t-com { color: #A79380; font-style: italic; }
+  .t-fn  { color: #B34A6E; }
+  .t-var { color: #6B5A4C; }
+  .t-param{ color: #8A6B5C; }
+  .t-tag { color: #D05E85; }
+  .t-attr{ color: #B9763F; }
+  .t-type{ color: #A268B8; }
+  .t-prop{ color: #8A5C7E; }
+
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 44px; }
+  footer code { background: rgba(255,255,255,.08); padding: 2px 8px; border-radius: 6px; color: #f4b8c8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">VS Code 主题插件 · LIGHT</span>
+    <h1><span class="en">Kawaii Macaron</span> · 卡哇伊马卡龙主题</h1>
+    <p class="sub">低饱和暖调粉色边框 · 暖黄 / 奶油白代码区 · 甜软少女感 · 代码依然清晰可读</p>
+  </header>
+
+  <div class="palette">
+    <div class="swatch"><div class="dot" style="background:#F2B4C4"></div>边框粉 F2B4C4</div>
+    <div class="swatch"><div class="dot" style="background:#E58AA8"></div>樱花粉 E58AA8</div>
+    <div class="swatch"><div class="dot" style="background:#F7DAE2"></div>樱花粉底 F7DAE2</div>
+    <div class="swatch"><div class="dot" style="background:#FAF3E7"></div>米奶白 FAF3E7</div>
+    <div class="swatch"><div class="dot" style="background:#FFF7E5"></div>暖黄 FFF7E5</div>
+    <div class="swatch"><div class="dot" style="background:#FDF5F0"></div>奶油白 FDF5F0</div>
+    <div class="swatch"><div class="dot" style="background:#C2587F"></div>关键字 C2587F</div>
+    <div class="swatch"><div class="dot" style="background:#A8763F"></div>字符串 A8763F</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- 暖黄款 -->
+    <div class="theme-card">
+      <div class="theme-head">
+        <div class="name">🍰 Kawaii Macaron · Warm Yellow 暖黄</div>
+        <div class="desc">代码区暖黄 #FFF7E5 · 奶油暖阳感，长时间阅读更柔和</div>
+      </div>
+      <div class="win">
+        <div class="titlebar" style="background:#F7DAE2">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="tabs">
+            <div class="tab" style="background:#F7E9DB;color:#A08A7B">app.tsx</div>
+            <div class="tab active" style="background:#FFF7E5;color:#C4617F">kawaii.ts</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="activitybar" style="background:#F7DAE2">
+            <i style="background:#E58AA8"></i><i style="background:#F6CDD9"></i><i style="background:#F6CDD9"></i><i style="background:#F6CDD9"></i>
+          </div>
+          <div class="sidebar" style="background:#FAF3E7;color:#6B5849;border-left:2px solid #F2B4C4">
+            <div class="folder">▼ src</div>
+            <div class="file" style="background:#F7DCE4;color:#5B2A3C">kawaii.ts</div>
+            <div class="file">app.tsx</div>
+            <div class="file">theme.json</div>
+            <div class="folder" style="margin-top:8px">▼ themes</div>
+            <div class="file">warm.json</div>
+            <div class="file">cream.json</div>
+          </div>
+          <div class="editor" style="background:#FFF7E5;color:#5B4A3E">
+            <div class="code-line"><span class="ln">1</span><span><span class="t-com">// 一个可爱的马卡龙主题</span></span></div>
+            <div class="code-line"><span class="ln">2</span><span><span class="t-key">import</span> <span class="t-var">{ useState }</span> <span class="t-key">from</span> <span class="t-str">"react"</span>;</span></div>
+            <div class="code-line"><span class="ln">3</span><span></span></div>
+            <div class="code-line"><span class="ln">4</span><span><span class="t-key">const</span> <span class="t-var">macaron</span> = [<span class="t-str">"草莓"</span>, <span class="t-str">"奶油"</span>, <span class="t-str">"抹茶"</span>];</span></div>
+            <div class="code-line"><span class="ln">5</span><span></span></div>
+            <div class="code-line"><span class="ln">6</span><span><span class="t-key">function</span> <span class="t-fn">KawaiiCard</span>(<span class="t-param">props</span>) {</span></div>
+            <div class="code-line"><span class="ln">7</span><span>  <span class="t-key">const</span> [<span class="t-var">count</span>, <span class="t-fn">setCount</span>] = <span class="t-fn">useState</span>(<span class="t-num">0</span>);</span></div>
+            <div class="code-line"><span class="ln">8</span><span>  <span class="t-key">return</span> (</span></div>
+            <div class="code-line"><span class="ln">9</span><span>    &lt;<span class="t-tag">div</span> <span class="t-attr">className</span>=<span class="t-str">"card"</span>&gt;</span></div>
+            <div class="code-line"><span class="ln">10</span><span>      &lt;<span class="t-tag">span</span>&gt;{<span class="t-param">props</span>.<span class="t-prop">title</span>}&lt;/<span class="t-tag">span</span>&gt;</span></div>
+            <div class="code-line"><span class="ln">11</span><span>      &lt;<span class="t-tag">button</span> <span class="t-attr">onClick</span>={() =&gt; <span class="t-fn">setCount</span>(<span class="t-var">count</span> + <span class="t-num">1</span>)}&gt;</span></div>
+            <div class="code-line"><span class="ln">12</span><span>        戳我 {<span class="t-var">count</span>} 次<span class="cursor"></span></span></div>
+            <div class="code-line"><span class="ln">13</span><span>      &lt;/<span class="t-tag">button</span>&gt;</span></div>
+            <div class="code-line"><span class="ln">14</span><span>    &lt;/<span class="t-tag">div</span>&gt;</span></div>
+            <div class="code-line"><span class="ln">15</span><span>  );</span></div>
+            <div class="code-line"><span class="ln">16</span><span>}</span></div>
+          </div>
+        </div>
+        <div class="statusbar" style="background:#F7DAE2;color:#8A3D55;border-top:2px solid #F2B4C4">
+          <span>main*</span><span>TypeScript</span><span>Ln 12, Col 14</span><span>UTF-8</span><span>LF</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 奶油白款 -->
+    <div class="theme-card">
+      <div class="theme-head">
+        <div class="name">🍓 Kawaii Macaron · Cream Milk 奶油白</div>
+        <div class="desc">代码区奶油白 #FDF5F0 · 清爽粉白感，界面更素净</div>
+      </div>
+      <div class="win">
+        <div class="titlebar" style="background:#F8DCE5">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="tabs">
+            <div class="tab" style="background:#F8E9E2;color:#A08A7B">app.tsx</div>
+            <div class="tab active" style="background:#FDF5F0;color:#C4617F">kawaii.py</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="activitybar" style="background:#F8DCE5">
+            <i style="background:#E58AA8"></i><i style="background:#F6CDD9"></i><i style="background:#F6CDD9"></i><i style="background:#F6CDD9"></i>
+          </div>
+          <div class="sidebar" style="background:#FAF3EC;color:#6B5849;border-left:2px solid #F2B4C4">
+            <div class="folder">▼ src</div>
+            <div class="file" style="background:#F7DCE4;color:#5B2A3C">kawaii.py</div>
+            <div class="file">app.tsx</div>
+            <div class="file">theme.json</div>
+            <div class="folder" style="margin-top:8px">▼ themes</div>
+            <div class="file">warm.json</div>
+            <div class="file">cream.json</div>
+          </div>
+          <div class="editor" style="background:#FDF5F0;color:#5B4A3E">
+            <div class="code-line"><span class="ln">1</span><span><span class="t-com"># 软萌马卡龙配色</span></span></div>
+            <div class="code-line"><span class="ln">2</span><span><span class="t-key">import</span> json</span></div>
+            <div class="code-line"><span class="ln">3</span><span></span></div>
+            <div class="code-line"><span class="ln">4</span><span><span class="t-key">class</span> <span class="t-type">MacaronTheme</span>:</span></div>
+            <div class="code-line"><span class="ln">5</span><span>    <span class="t-key">def</span> <span class="t-fn">__init__</span>(<span class="t-param">self</span>, <span class="t-param">name</span>):</span></div>
+            <div class="code-line"><span class="ln">6</span><span>        <span class="t-param">self</span>.<span class="t-prop">name</span> = <span class="t-param">name</span></span></div>
+            <div class="code-line"><span class="ln">7</span><span>        <span class="t-param">self</span>.<span class="t-prop">colors</span> = [<span class="t-str">"pink"</span>, <span class="t-str">"cream"</span>]</span></div>
+            <div class="code-line"><span class="ln">8</span><span></span></div>
+            <div class="code-line"><span class="ln">9</span><span>    <span class="t-key">def</span> <span class="t-fn">render</span>(<span class="t-param">self</span>):</span></div>
+            <div class="code-line"><span class="ln">10</span><span>        <span class="t-key">return</span> json.<span class="t-fn">dumps</span>(<span class="t-param">self</span>.<span class="t-prop">colors</span>, <span class="t-param">indent</span>=<span class="t-num">2</span>)</span></div>
+            <div class="code-line"><span class="ln">11</span><span></span></div>
+            <div class="code-line"><span class="ln">12</span><span><span class="t-var">theme</span> = <span class="t-fn">MacaronTheme</span>(<span class="t-str">"kawaii"</span>)</span></div>
+            <div class="code-line"><span class="ln">13</span><span>print(theme.<span class="t-fn">render</span>())<span class="cursor"></span></span></div>
+          </div>
+        </div>
+        <div class="statusbar" style="background:#F8DCE5;color:#8A3D55;border-top:2px solid #F2B4C4">
+          <span>main*</span><span>Python</span><span>Ln 13, Col 23</span><span>UTF-8</span><span>LF</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>两个变体共用同一套粉色边框与马卡龙语法配色，仅代码区底色不同。安装后 <code>Ctrl+K Ctrl+T</code> 即可切换。</p>
+    <p style="margin-top:8px">完整工程位于 <code>D:\jk\vscode-kawaii-macaron-theme</code></p>
+  </footer>
+</div>
+</body>
+</html>
